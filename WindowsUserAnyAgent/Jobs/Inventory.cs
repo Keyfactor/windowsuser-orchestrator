@@ -1,34 +1,22 @@
-﻿using CSS.Common.Logging;
-using Keyfactor.Platform.Extensions.Agents;
-using Keyfactor.Platform.Extensions.Agents.Delegates;
-using Keyfactor.Platform.Extensions.Agents.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
+using Keyfactor.Platform.Extensions.Agents;
+using Keyfactor.Platform.Extensions.Agents.Delegates;
+using Keyfactor.Platform.Extensions.Agents.Interfaces;
 
-namespace WindowsUserAnyAgent
+namespace Keyfactor.AnyAgent.WindowsUser
 {
-    public class WindowsUserStoreInventory : LoggingClientBase, IAgentJobExtension
+    [Job(JobTypes.INVENTORY)]
+    public class Inventory : AgentJob, IAgentJobExtension
     {
-        public string GetJobClass()
+        public override AnyJobCompleteInfo processJob(AnyJobConfigInfo config, SubmitInventoryUpdate submitInventory, SubmitEnrollmentRequest submitEnrollmentRequest, SubmitDiscoveryResults sdr)
         {
-            return "Inventory";
+            return PerformInventory(submitInventory);
         }
 
-        public string GetStoreType()
-        {
-            return "WinU";
-        }
-
-        public AnyJobCompleteInfo processJob(AnyJobConfigInfo config, SubmitInventoryUpdate submitInventory, SubmitEnrollmentRequest submitEnrollmentRequest, SubmitDiscoveryResults sdr)
-        {
-            return PerformInventory(config, submitInventory);
-        }
-
-        private AnyJobCompleteInfo PerformInventory(AnyJobConfigInfo config, SubmitInventoryUpdate inventoryCallback)
+        private AnyJobCompleteInfo PerformInventory(SubmitInventoryUpdate inventoryCallback)
         {
             try
             {
@@ -39,14 +27,14 @@ namespace WindowsUserAnyAgent
                     List<AgentCertStoreInventoryItem> inventory = store.Certificates.OfType<X509Certificate2>().Select(c => new AgentCertStoreInventoryItem()
                     {
                         Alias = c.Thumbprint.Replace(" ", ""),
-                        Certificates = new string[] {Convert.ToBase64String(c.RawData)},
-                        ItemStatus = Keyfactor.Platform.Extensions.Agents.Enums.AgentInventoryItemStatus.Unknown,
+                        Certificates = new string[] { Convert.ToBase64String(c.RawData) },
+                        ItemStatus = Platform.Extensions.Agents.Enums.AgentInventoryItemStatus.Unknown,
                         PrivateKeyEntry = c.HasPrivateKey,
                         UseChainLevel = false
                     })
                     .ToList();
 
-                    if(!inventoryCallback.Invoke(inventory))
+                    if (!inventoryCallback.Invoke(inventory))
                     {
                         throw new Exception("Error submitting updated inventory");
                     }
@@ -66,3 +54,4 @@ namespace WindowsUserAnyAgent
         }
     }
 }
+

@@ -1,45 +1,37 @@
-﻿using CSS.Common.Logging;
+﻿using System;
+using System.Security.Cryptography.X509Certificates;
 using Keyfactor.Platform.Extensions.Agents;
 using Keyfactor.Platform.Extensions.Agents.Delegates;
+using Keyfactor.Platform.Extensions.Agents.Enums;
 using Keyfactor.Platform.Extensions.Agents.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace WindowsUserAnyAgent
+namespace Keyfactor.AnyAgent.WindowsUser
 {
-    public class WindowsUserStoreManagement : LoggingClientBase, IAgentJobExtension
+    [Job(JobTypes.MANAGEMENT)]
+    public class Management : AgentJob, IAgentJobExtension
     {
-        public string GetJobClass()
+        public override AnyJobCompleteInfo processJob(AnyJobConfigInfo config, SubmitInventoryUpdate submitInventory, SubmitEnrollmentRequest submitEnrollmentRequest, SubmitDiscoveryResults sdr)
         {
-            return "Management";
+
+            AnyJobCompleteInfo complete = new AnyJobCompleteInfo()
+            {
+                Status = 4,
+                Message = "Invalid Management Operation"
+            };
+
+            switch (config.Job.OperationType)
+            {
+                case AnyJobOperationType.Add:
+                    complete = PerformAddition(config.Job.EntryContents, config.Job.PfxPassword);
+                    break;
+                case AnyJobOperationType.Remove:
+                    complete = PerformRemoval(config.Job.Alias);
+                    break;
+            }
+            return complete;
         }
 
-        public string GetStoreType()
-        {
-            return "WinU";
-        }
-
-        public AnyJobCompleteInfo processJob(AnyJobConfigInfo config, SubmitInventoryUpdate submitInventory, SubmitEnrollmentRequest submitEnrollmentRequest, SubmitDiscoveryResults sdr)
-        {
-            if(config.Job.OperationType == Keyfactor.Platform.Extensions.Agents.Enums.AnyJobOperationType.Add)
-            {
-                return PerformAdd(config);
-            }
-            else if(config.Job.OperationType == Keyfactor.Platform.Extensions.Agents.Enums.AnyJobOperationType.Remove)
-            {
-                return PerformRemove(config);
-            }
-            else
-            {
-                throw new Exception($"Unexpected operation type: {config.Job.OperationType}");
-            }
-        }
-
-        private AnyJobCompleteInfo PerformAdd(AnyJobConfigInfo config)
+        protected virtual AnyJobCompleteInfo PerformAddition(string entryContents, string pfxPassword)
         {
             try
             {
@@ -47,7 +39,7 @@ namespace WindowsUserAnyAgent
                 {
                     store.Open(OpenFlags.ReadWrite | OpenFlags.OpenExistingOnly);
 
-                    X509Certificate2 certToAdd = GetCertFromBase64String(config.Job.EntryContents, config.Job.PfxPassword);
+                    X509Certificate2 certToAdd = GetCertFromBase64String(entryContents, pfxPassword);
                     string thumb = certToAdd.Thumbprint
                         .Replace(" ", "")
                         .Replace("\u200e", "");
@@ -55,18 +47,19 @@ namespace WindowsUserAnyAgent
                     Logger.Trace($"Searching for certificate with thumbprint {thumb}");
                     X509Certificate2Collection searchResults = store.Certificates.Find(X509FindType.FindByThumbprint, thumb, false);
 
-                    if(searchResults.Count == 0)
+                    if (searchResults.Count == 0)
                     {
                         Logger.Trace("Adding certificate");
                         store.Add(certToAdd);
                     }
                     else
                     {
-                        Logger.Warn($"Certificate with thumbprint {thumb} already exists in store. No action will be taken");
+                        var msg = $"Certificate with thumbprint {thumb} already exists in store. No action will be taken";
+                        Logger.Warn(msg);
                         return new AnyJobCompleteInfo()
                         {
                             Status = 3, // Warning
-                            Message = $"Certificate with thumbprint {thumb} already exists in store. No action will be taken"
+                            Message = msg
                         };
                     }
                 }
@@ -84,7 +77,7 @@ namespace WindowsUserAnyAgent
             };
         }
 
-        private AnyJobCompleteInfo PerformRemove(AnyJobConfigInfo config)
+        protected virtual AnyJobCompleteInfo PerformRemoval(string alias)
         {
             try
             {
@@ -92,8 +85,7 @@ namespace WindowsUserAnyAgent
                 {
                     store.Open(OpenFlags.ReadWrite | OpenFlags.OpenExistingOnly);
 
-                    X509Certificate2 certToAdd = GetCertFromBase64String(config.Job.EntryContents, config.Job.PfxPassword);
-                    string thumb = config.Job.Alias
+                    string thumb = alias
                         .Replace(" ", "")
                         .Replace("\u200e", "");
 
@@ -102,11 +94,12 @@ namespace WindowsUserAnyAgent
 
                     if (searchResults.Count == 0)
                     {
-                        Logger.Warn($"Certificate with thumbprint {thumb} does not exist in store. No action will be taken");
+                        var msg = $"Certificate with thumbprint {thumb} does not exist in store. No action will be taken";
+                        Logger.Warn(msg);
                         return new AnyJobCompleteInfo()
                         {
                             Status = 3, // Warning
-                            Message = $"Certificate with thumbprint {thumb} does not exist in store. No action will be taken"
+                            Message = msg
                         };
                     }
                     else
@@ -139,3 +132,4 @@ namespace WindowsUserAnyAgent
         }
     }
 }
+
