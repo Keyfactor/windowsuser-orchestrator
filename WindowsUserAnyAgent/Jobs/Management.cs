@@ -5,7 +5,7 @@ using Keyfactor.Platform.Extensions.Agents.Delegates;
 using Keyfactor.Platform.Extensions.Agents.Enums;
 using Keyfactor.Platform.Extensions.Agents.Interfaces;
 
-namespace Keyfactor.AnyAgent.WindowsUser
+namespace Keyfactor.Extensions.Orchestrator.WindowsUser
 {
     [Job(JobTypes.MANAGEMENT)]
     public class Management : AgentJob, IAgentJobExtension

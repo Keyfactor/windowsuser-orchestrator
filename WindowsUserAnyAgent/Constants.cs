@@ -1,4 +1,4 @@
-﻿namespace Keyfactor.AnyAgent.WindowsUser
+﻿namespace Keyfactor.Extensions.Orchestrator.WindowsUser
 {
     static class WindowsUserAnyAgentConstants
     {

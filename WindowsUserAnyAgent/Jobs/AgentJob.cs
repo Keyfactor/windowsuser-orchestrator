@@ -5,7 +5,7 @@ using Keyfactor.Platform.Extensions.Agents;
 using Keyfactor.Platform.Extensions.Agents.Delegates;
 using Keyfactor.Platform.Extensions.Agents.Interfaces;
 
-namespace Keyfactor.AnyAgent.WindowsUser
+namespace Keyfactor.Extensions.Orchestrator.WindowsUser
 {
     public abstract class AgentJob : LoggingClientBase, IAgentJobExtension
     {

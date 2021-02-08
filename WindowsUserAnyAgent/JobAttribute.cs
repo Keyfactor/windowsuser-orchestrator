@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Keyfactor.AnyAgent.WindowsUser
+namespace Keyfactor.Extensions.Orchestrator.WindowsUser
 {
     [AttributeUsage(AttributeTargets.Class)]
     public class JobAttribute : Attribute

@@ -5,9 +5,9 @@
 
     <IsPackable>false</IsPackable>
 
-    <RootNamespace>Keyfactor.AnyAgent.WindowsUser.Tests</RootNamespace>
+    <RootNamespace>Keyfactor.Extensions.Orchestrator.WindowsUser.Tests</RootNamespace>
 
-    <AssemblyName>Keyfactor.AnyAgent.WindowsUser.Tests</AssemblyName>
+    <AssemblyName>Keyfactor.Extensions.Orchestrator.WindowsUser.Tests</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WindowsUserAnyAgent\WindowsUserAnyAgent.csproj" />
+    <ProjectReference Include="..\WindowsUserAnyAgent\WindowsUserOrchestrator.csproj" />
   </ItemGroup>
 
 </Project>

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsUserAnyAgent", "WindowsUserAnyAgent\WindowsUserAnyAgent.csproj", "{EFF0E662-25EA-499C-B86F-92EBEA3283D7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsUserOrchestrator", "WindowsUserAnyAgent\WindowsUserOrchestrator.csproj", "{EFF0E662-25EA-499C-B86F-92EBEA3283D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsUserAnyAgentTests", "Tests\WindowsUserAnyAgentTests.csproj", "{7E162C10-A714-4083-A361-61E47F57338D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WindowsUserOrchestratorTests", "Tests\WindowsUserOrchestratorTests.csproj", "{7E162C10-A714-4083-A361-61E47F57338D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -4,7 +4,7 @@ using Keyfactor.Platform.Extensions.Agents;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
-namespace Keyfactor.AnyAgent.WindowsUser.Tests
+namespace Keyfactor.Extensions.Orchestrator.WindowsUser.Tests
 {
     [TestClass]
     public class InventoryTests

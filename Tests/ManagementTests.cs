@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Moq.Protected;
 
-namespace Keyfactor.AnyAgent.WindowsUser.Tests
+namespace Keyfactor.Extensions.Orchestrator.WindowsUser.Tests
 {
     [TestClass]
     public class ManagementTests

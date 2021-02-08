@@ -4,8 +4,8 @@ using Keyfactor.Platform.Extensions.Agents;
 using Keyfactor.Platform.Extensions.Agents.Delegates;
 using Moq;
 
-[assembly: InternalsVisibleTo("Keyfactor.AnyAgent.WindowsUser")]
-namespace Keyfactor.AnyAgent.WindowsUser.Tests
+[assembly: InternalsVisibleTo("Keyfactor.Extensions.Orchestrator.WindowsUser")]
+namespace Keyfactor.Extensions.Orchestrator.WindowsUser.Tests
 {
     public static class Mocks
     {
