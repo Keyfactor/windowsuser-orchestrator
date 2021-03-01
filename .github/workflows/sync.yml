@@ -1,5 +1,5 @@
 name: Copy
-on: workflow_deploy
+on: workflow_dispatch
 jobs:
   copy:
     runs-on: ubuntu-latest
