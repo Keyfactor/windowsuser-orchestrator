@@ -1,4 +1,3 @@
-- files:
-      - source: README.md
-        dest: _integrations/${{ github.event.repository.name }}.md
-    repos: Keyfactor/keyfactor.github.io
+Keyfactor/keyfactor.github.io:
+- source: README.md
+  dest: _integrations/${{ github.event.repository.name }}.md
