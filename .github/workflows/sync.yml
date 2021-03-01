@@ -1,8 +1,5 @@
 name: Sync Files
 on:
-  deployment:
-    branches:
-      - master
   workflow_dispatch:
 jobs:
   sync:
