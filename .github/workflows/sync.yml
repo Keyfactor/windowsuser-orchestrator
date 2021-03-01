@@ -1,13 +1,20 @@
-name: Sync Files
-on:
-  workflow_dispatch:
+name: Copy
+on: workflow_deploy
 jobs:
-  sync:
+  copy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@master
-      - name: Run GitHub File Sync
-        uses: BetaHuhn/repo-file-sync-action@v1
-        with:
-          GH_PAT: ${{ secrets.SDK_SYNC_PAT }}
+    - name: Copy to SDK docs
+      uses: andstor/copycat-action@v3
+      with:
+        personal_token: ${{ secrets.SDK_SYNC_PAT }}
+        src_path: ./README.md
+        dst_path: ${{ format('/_integrations/{0}.md', github.event.repository.name) }}
+        dst_owner: Keyfactor
+        dst_repo_name: keyfactor.github.io
+        dst_branch: master
+        src_branch: master
+        src_wiki: false
+        dst_wiki: false
+        username: Keyfactor
+        email: Keyfactor@keyfactor.github.io
