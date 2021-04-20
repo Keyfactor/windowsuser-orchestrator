@@ -13,7 +13,7 @@
 - Add Cert
 - Remove Cert
 
-[Here] is a detailed walkthrough of how to get started creating your own orchestrator, using this one as an example.
+[Here](https://keyfactor.github.io/sdk-docs/examples/walkthrough) is a detailed walkthrough of how to get started creating your own orchestrator, using this one as an example.
 
 ***
 
