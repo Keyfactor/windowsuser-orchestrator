@@ -7,6 +7,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsUserOrchestrator", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WindowsUserOrchestratorTests", "Tests\WindowsUserOrchestratorTests.csproj", "{7E162C10-A714-4083-A361-61E47F57338D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{51BE563F-EEB7-4336-9DC4-6C5DDB4A92A5}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		integration-manifest.json = integration-manifest.json
+		LICENSE = LICENSE
+		README.md.tpl = README.md.tpl
+		WindowsUserOrchestrator.sln.licenseheader = WindowsUserOrchestrator.sln.licenseheader
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
