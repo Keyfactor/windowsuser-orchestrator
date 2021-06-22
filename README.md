@@ -13,7 +13,7 @@ This integration can manage certificates in the user store on the host Windows m
 - Add Cert
 - Remove Cert
 
-[Here](https://keyfactor.github.io/sdk-docs/examples/walkthrough) is a detailed walkthrough of how to get started creating your own orchestrator, using this one as an example.
+[Here](https://keyfactor.github.io/sdk-docs/examples/orchestrator.html) is a detailed walkthrough of how to get started creating your own orchestrator, using this one as an example.
 
 ***
 
