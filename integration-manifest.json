@@ -3,5 +3,6 @@
   "integration_type": "orchestrator",
   "name": "Windows User Certificate Store",
   "status": "pilot",
+  "link_github": true,
   "description": "This integration can manage certificates in the user store on the host Windows machine of the Orchestrator.  It is also used as an example for how to get started writing your own Orchestrator integration."
 }
