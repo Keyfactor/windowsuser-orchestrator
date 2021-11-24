@@ -1,6 +1,6 @@
 {
   "$schema": "https://keyfactor.github.io/integration-manifest-schema.json",
-  "integration_type": "orchestrator",
+  "integration_type": "windows-orchestrator",
   "name": "Windows User Certificate Store",
   "status": "pilot",
   "link_github": true,
