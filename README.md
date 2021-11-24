@@ -1,5 +1,5 @@
 ﻿# Windows User Certificate Store
-## Orchestrator
+## Windows-orchestrator
 
 The Windows User Certificate Store Orchestrator allows for management of certificates within the user certificate store on a Windows based computer. It is a sample implementation as referenced by the Keyfactor Integration SDK. Inventory and Management functions are supported.
 
